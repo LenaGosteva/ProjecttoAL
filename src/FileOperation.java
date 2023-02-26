@@ -43,22 +43,7 @@ public class FileOperation {
         }
         return personals;
     }
-    public void writeFilePersonal(ArrayList<Personal> data) {
-        try (FileWriter writer = new FileWriter(file)) {
-            for (int j = 0; j < data.size(); j++) {
-                if (data.get(j) instanceof Personal) {
-                    Personal newPersonal = (Personal) data.get(j);
-                    writer.write(newPersonal.id + " -> " +newPersonal.role + " -> "+ newPersonal.name+ " -> "+ newPersonal.password+ " -> "+ newPersonal.login);
-                    writer.append("\n");
-                } else {
-                    log.setMsg("Данные этого каласса не поддерживаются", "err");
-                    return;
-                }
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
 
     public ArrayList<Product> readFileProduct() {
         ArrayList<Product> products = new ArrayList<Product>();
@@ -78,19 +63,29 @@ public class FileOperation {
         }
         return products;
     }
-    public void writeFileProduct(ArrayList<Product> data) {
+    public <T> void  writeFile(ArrayList<T> data) {
 
         try (FileWriter writer = new FileWriter(file)) {
             for (int j = 0; j < data.size(); j++) {
-                if (data.get(j) instanceof Product) {
-                    Product newProduct = (Product) data.get(j);
-                    writer.write(newProduct.id +" ->" +newProduct.name + " -> "+ newProduct.price);
+                if (data.get(j) instanceof T) {
+                    T element = data.get(j);
+                    writer.write(element.toString());
                     writer.append("\n");
                 } else {
                     log.setMsg("Data of this class is not supported", "err");
                     return;
                 }
             }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public <T> void writeFile(T data) {
+
+        try (FileWriter writer = new FileWriter(file)) {
+                    writer.write(data.toString());
+                    writer.append("\n");
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

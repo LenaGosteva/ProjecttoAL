@@ -12,10 +12,10 @@ public class Main {
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
-        logger = new Logger("C:\\Supermarket\\Logger.txt");
+        logger = new Logger("Logger");
         logger.setMsg("Program is started", "info");
-        File personal = new File("C:\\Supermarket\\Personal.txt");
-        File products = new File("C:\\Supermarket\\Products.txt");
+        File personal = new File("C:\\AtomLabAllLessons\\Supermarket\\Personal.txt");
+        File products = new File("C:\\AtomLabAllLessons\\Supermarket\\Products.txt");
         FileOperation personalFO = new FileOperation(personal);
         FileOperation productFO = new FileOperation(products);
 
@@ -39,6 +39,7 @@ public class Main {
                         "\nDo you want to add something? Type 'true' or 'false'." + AllConstants.ANSI_RESET);
                 switch (scanner.nextLine()) {
                     case "true":
+//                        addPersonal(listPersonal, personalFO);
                         addProduct(listProduct, productFO);
                         break;
                     case "false":
@@ -105,10 +106,10 @@ public class Main {
                                     "\nif you want finish program, type anything else. ");
                             while (true) {
                                 switch (scanner.nextLine()) {
-                                    case "personal":
+                                    case "add personal":
                                         addPersonal(listPersonal, personalFO);
                                         break;
-                                    case "product":
+                                    case "add product":
                                         addProduct(listProduct, productFO);
                                         break;
                                     case "see personal":
@@ -170,16 +171,14 @@ public class Main {
             Float price = scanner.nextFloat();
             listProduct.add(new Product(id_p, name, price));
 
-            logger.setMsg("If you want to complete the input, write 'exit', press enter", "war");
-            System.out.println();
+            logger.setMsg("If you want to complete the input, write 'exit'", "war");
             if (exit.equals(scanner.nextLine())) {
                 logger.setMsg("Program is finished", "info");
                 break;
             }
             id_p += 1;
-        }
-        if (listProduct.size() != 0) {
-            productFO.writeFileProduct(listProduct);
+        }if (listProduct.size() != 0) {
+            productFO.writeFile(listProduct);
         }
     }
 
@@ -197,17 +196,14 @@ public class Main {
             System.out.println("Enter password:");
             String password = scanner.nextLine();
             listPersonal.add(new Personal(id, role, name, password, login));
-
-            logger.setMsg("If you want to complete the input, write 'exit', else press enter", "war");
-            System.out.println();
+            logger.setMsg("If you want to complete the input, write 'exit'", "war");
             if (exit.equals(scanner.nextLine())) {
                 logger.setMsg("Program is finished", "info");
                 break;
             }
             id += 1;
-        }
-        if (listPersonal.size() != 0) {
-            personalFO.writeFilePersonal(listPersonal);
+        }if (listPersonal.size() != 0) {
+            personalFO.writeFile(listPersonal);
         }
     }
 
