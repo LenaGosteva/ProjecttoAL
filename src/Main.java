@@ -154,20 +154,20 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-                System.out.println("\nEnter name:");
-                String name = scanner.nextLine();
-                System.out.println("Enter price:");
-                Float price = scanner.nextFloat();
-                scanner.nextLine();
-                logger.setMsg("If you want to complete the input, write 'exit'", "war");
+            System.out.println("\nEnter name:");
+            String name = scanner.nextLine();
+            System.out.println("Enter price:");
+            Float price = scanner.nextFloat();
+            scanner.nextLine();
+            logger.setMsg("If you want to complete the input, write 'exit'", "war");
             listProduct.add(new Product(id_p, name, price));
 
             String s = scanner.nextLine();
-                if (exit.equals(s)) {
-                    logger.setMsg("Program is finished", "info");
-                    break;
-                }
-                id_p += 1;
+            if (exit.equals(s)) {
+                logger.setMsg("Program is finished", "info");
+                break;
+            }
+            id_p += 1;
         }
         if (listProduct.size() != 0) {
             productFO.writeFile(listProduct);
