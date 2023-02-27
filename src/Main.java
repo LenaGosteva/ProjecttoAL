@@ -35,20 +35,9 @@ public class Main {
 
         switch (enterRole) {
             case "customer":
-                System.out.println("\nOkay. You can add some product" + AllConstants.ANSI_BLUE +
-                        "\nDo you want to add something? Type 'true' or 'false'." + AllConstants.ANSI_RESET);
-                switch (scanner.nextLine()) {
-                    case "true":
-//                        addPersonal(listPersonal, personalFO);
-                        addProduct(listProduct, productFO);
-                        break;
-                    case "false":
-                        logger.setMsg("Program is finished", "info");
-                        break;
-                    default:
-                        logger.setMsg("ERROR!!!", "err");
-                        break;
-                }
+                System.out.println("\nOkay. You can add some product");
+
+                addProduct(listProduct, productFO);
                 break;
             case "personal":
                 System.out.print(AllConstants.ANSI_BLUE + "Okay. Please, enter your login: " + AllConstants.ANSI_RESET);
@@ -165,19 +154,22 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("Enter name:");
-            String name = scanner.nextLine();
-            System.out.println("Enter price:");
-            Float price = scanner.nextFloat();
+                System.out.println("\nEnter name:");
+                String name = scanner.nextLine();
+                System.out.println("Enter price:");
+                Float price = scanner.nextFloat();
+                scanner.nextLine();
+                logger.setMsg("If you want to complete the input, write 'exit'", "war");
             listProduct.add(new Product(id_p, name, price));
 
-            logger.setMsg("If you want to complete the input, write 'exit'", "war");
-            if (exit.equals(scanner.nextLine())) {
-                logger.setMsg("Program is finished", "info");
-                break;
-            }
-            id_p += 1;
-        }if (listProduct.size() != 0) {
+            String s = scanner.nextLine();
+                if (exit.equals(s)) {
+                    logger.setMsg("Program is finished", "info");
+                    break;
+                }
+                id_p += 1;
+        }
+        if (listProduct.size() != 0) {
             productFO.writeFile(listProduct);
         }
     }
@@ -186,7 +178,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("Enter role:");
+
+            System.out.println("\nEnter role:");
             String role = scanner.nextLine();
             checkRole(role);
             System.out.println("Enter name:");
@@ -195,14 +188,18 @@ public class Main {
             String login = scanner.nextLine();
             System.out.println("Enter password:");
             String password = scanner.nextLine();
-            listPersonal.add(new Personal(id, role, name, password, login));
+            scanner.nextLine();
             logger.setMsg("If you want to complete the input, write 'exit'", "war");
+            System.out.println();
             if (exit.equals(scanner.nextLine())) {
                 logger.setMsg("Program is finished", "info");
                 break;
             }
+            listPersonal.add(new Personal(id, role, name, password, login));
+
             id += 1;
-        }if (listPersonal.size() != 0) {
+        }
+        if (listPersonal.size() != 0) {
             personalFO.writeFile(listPersonal);
         }
     }
