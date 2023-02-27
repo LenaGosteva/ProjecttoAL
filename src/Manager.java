@@ -8,6 +8,12 @@ public class Manager extends Personal {
     }
 
 
+    public <T> void see(ArrayList<T> data){
+        for (T element: data) {
+            System.out.println(element.toString());
+        }
+    }
+
     @Override
     public int getId() {
         return super.getId();

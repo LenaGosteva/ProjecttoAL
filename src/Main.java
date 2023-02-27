@@ -14,11 +14,10 @@ public class Main {
     public static void main(String[] args) throws IOException {
         logger = new Logger("Logger");
         logger.setMsg("Program is started", "info");
-        File personal = new File("C:\\AtomLabAllLessons\\Supermarket\\Personal.txt");
-        File products = new File("C:\\AtomLabAllLessons\\Supermarket\\Products.txt");
+        File personal = new File("C:\\AtomLabAllLessons\\ProjecttoAL\\src\\Personal.txt");
+        File products = new File("C:\\AtomLabAllLessons\\ProjecttoAL\\src\\Products.txt");
         FileOperation personalFO = new FileOperation(personal);
         FileOperation productFO = new FileOperation(products);
-
 
         ArrayList<Personal> listPersonal = new ArrayList<>();
         listPersonal = personalFO.readFilePersonal();
